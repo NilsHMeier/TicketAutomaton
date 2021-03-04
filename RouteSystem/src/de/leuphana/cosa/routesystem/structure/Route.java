@@ -31,6 +31,6 @@ public class Route {
 
     @Override
     public String toString() {
-        return start + " - " + destination + " - " + distance;
+        return "Start " + start + " - Destination " + destination + " - Distance " + distance + " - Mileage " + mileage;
     }
 }

@@ -40,7 +40,6 @@ public class RouteEventHandler implements EventHandler {
             properties.put("distance", route.getDistance());
             properties.put("mileage", route.getMileage());
 
-            // Send event that route has been selected
             Event routeSelectedEvent = new Event("de/leuphana/cosa/routesystem/ROUTE_SELECTED", properties);
             eventAdmin.sendEvent(routeSelectedEvent);
         }

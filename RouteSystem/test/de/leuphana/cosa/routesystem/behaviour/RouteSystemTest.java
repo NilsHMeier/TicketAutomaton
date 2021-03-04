@@ -16,13 +16,9 @@ class RouteSystemTest {
         route = new Route("Hamburg", "Lüneburg", 43.5);
         routingSystem.createRoute("Hamburg", "Bremen", 94.9);
         routingSystem.createRoute("Hamburg", "Hannover", 132.0);
-        routingSystem.createRoute("Bremen", "Lüneburg", 108.6);
+        routingSystem.createRoute("Bremen", "Lueneburg", 108.6);
         routingSystem.createRoute("Bremen", "Hannover", 100.3);
-        routingSystem.createRoute("Hannover", "Lüneburg", 107.2);
-
-    }
-    @BeforeEach
-    void setUp() {
+        routingSystem.createRoute("Hannover", "Lueneburg", 107.2);
 
     }
 
@@ -53,12 +49,12 @@ class RouteSystemTest {
     @Test
     @Order(4)
     void canRouteBeCreated() {
-        Assertions.assertTrue(routingSystem.createRoute("Hamburg", "Lüneburg", 43.5));
+        Assertions.assertTrue(routingSystem.createRoute("Hamburg", "Lueneburg", 43.5));
     }
 
     @Test
     @Order(5)
-    void canRouteBeSelected() {
-        Assertions.assertNotNull(routingSystem.selectRoute());
+    void canRouteBeLoaded() {
+        Assertions.assertNotNull(routingSystem.loadRoute("Bremen", "Hannover"));
     }
 }

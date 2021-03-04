@@ -43,6 +43,11 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
     }
 
     @Override
+    public Route loadRoute(String start, String destination) {
+        return routeMap.get(start).get(destination);
+    }
+
+    @Override
     public Boolean createRoute(String start, String destination, Double distance) {
         return addRoute(new Route(start, destination, distance));
     }
@@ -76,10 +81,16 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
         String[] topics = new String[] {
                 "de/leuphana/cosa/ticketautomaton/TICKET_REQUESTED"
         };
-        Dictionary props = new Hashtable();
-        props.put(EventConstants.EVENT_TOPIC, topics);
+        Dictionary properties = new Hashtable();
+        properties.put(EventConstants.EVENT_TOPIC, topics);
         RouteEventHandler eventHandler = new RouteEventHandler(this, bundleContext);
-        bundleContext.registerService(RouteEventHandler.class.getName(), eventHandler, props);
+        bundleContext.registerService(RouteEventHandler.class.getName(), eventHandler, properties);
+
+        createRoute("Hamburg", "Bremen", 94.9);
+        createRoute("Hamburg", "Hannover", 132.0);
+        createRoute("Bremen", "Lueneburg", 108.6);
+        createRoute("Bremen", "Hannover", 100.3);
+        createRoute("Hannover", "Lueneburg", 107.2);
     }
 
     @Override

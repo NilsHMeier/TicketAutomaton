@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Osmorc" name="OSGi">
+      <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="TicketAutomaton.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="de.leuphana.cosa.ticketautomaton.behaviour.TicketAutomaton" bundleSymbolicName="TicketAutomaton" bundleVersion="1.0.0" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
+        <additionalProperties />
+        <additionalJARContents />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ComponentServiceBus" />
+    <orderEntry type="module" module-name="PrintingSystem" />
+    <orderEntry type="module" module-name="MessagingSystem" />
+    <orderEntry type="module" module-name="Component" />
+    <orderEntry type="module" module-name="DocumentSystem" />
+    <orderEntry type="module" module-name="Component" />
+    <orderEntry type="module" module-name="PrintingSystem" />
+    <orderEntry type="module" module-name="ComponentServiceBus" />
+    <orderEntry type="module" module-name="DocumentSystem" />
+    <orderEntry type="module" module-name="MessagingSystem" />
+    <orderEntry type="library" name="log4j-api-2.13.3" level="application" />
+    <orderEntry type="library" name="log4j-core-2.13.3" level="application" />
+    <orderEntry type="library" scope="TEST" name="JUnit5.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="felix" level="application" />
+    <orderEntry type="library" name="org.apache.felix.eventadmin-1.6.2" level="project" />
+  </component>
+</module>

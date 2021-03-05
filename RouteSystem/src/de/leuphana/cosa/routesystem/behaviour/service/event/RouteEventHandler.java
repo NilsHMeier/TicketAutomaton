@@ -1,5 +1,6 @@
 package de.leuphana.cosa.routesystem.behaviour.service.event;
 
+import de.leuphana.cosa.routesystem.behaviour.service.Driveable;
 import de.leuphana.cosa.routesystem.behaviour.service.RouteCommandService;
 import de.leuphana.cosa.routesystem.structure.Route;
 import org.osgi.framework.BundleContext;
@@ -18,27 +19,36 @@ public class RouteEventHandler implements EventHandler {
 
     public RouteEventHandler(RouteCommandService routingSystem, BundleContext bundleContext) {
         this.routingSystem = routingSystem;
-        System.out.println("BundleContext = "+bundleContext);
         ServiceReference<?> reference = bundleContext.getServiceReference(EventAdmin.class.getName());
-        System.out.println(reference);
         if (reference != null) {
             eventAdmin = (EventAdmin) bundleContext.getService(reference);
         }
-        System.out.println("EventAdmin = " + eventAdmin.toString());
     }
 
     @Override
     public void handleEvent(Event event) {
-        System.out.println("Caught event in RouteSystem!");
         String topic = event.getTopic();
 
         if (topic.equals("de/leuphana/cosa/ticketautomaton/TICKET_REQUESTED")) {
             Route route = routingSystem.selectRoute();
+            Driveable driveable = new Driveable() {
+                @Override
+                public String getStart() {
+                    return route.getStart();
+                }
+
+                @Override
+                public String getDestination() {
+                    return route.getDestination();
+                }
+
+                @Override
+                public Double getMileage() {
+                    return route.getMileage();
+                }
+            };
             Dictionary<String, Object> properties = new Hashtable<>();
-            properties.put("start", route.getStart());
-            properties.put("destination", route.getDestination());
-            properties.put("distance", route.getDistance());
-            properties.put("mileage", route.getMileage());
+            properties.put("driveable", driveable);
 
             Event routeSelectedEvent = new Event("de/leuphana/cosa/routesystem/ROUTE_SELECTED", properties);
             eventAdmin.sendEvent(routeSelectedEvent);

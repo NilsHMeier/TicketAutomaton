@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventConstants;
+import org.osgi.service.event.EventHandler;
 
 import java.util.*;
 
@@ -84,8 +85,9 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
         Dictionary properties = new Hashtable();
         properties.put(EventConstants.EVENT_TOPIC, topics);
         RouteEventHandler eventHandler = new RouteEventHandler(this, bundleContext);
-        bundleContext.registerService(RouteEventHandler.class.getName(), eventHandler, properties);
+        bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
 
+        // Create some default routs
         createRoute("Hamburg", "Bremen", 94.9);
         createRoute("Hamburg", "Hannover", 132.0);
         createRoute("Bremen", "Lueneburg", 108.6);

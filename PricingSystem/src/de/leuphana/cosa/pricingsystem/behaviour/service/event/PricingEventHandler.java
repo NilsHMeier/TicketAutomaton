@@ -1,5 +1,7 @@
 package de.leuphana.cosa.pricingsystem.behaviour.service.event;
 
+import de.leuphana.cosa.pricingsystem.behaviour.service.Payable;
+import de.leuphana.cosa.pricingsystem.behaviour.service.PaymentReport;
 import de.leuphana.cosa.pricingsystem.behaviour.service.PricingCommandService;
 import de.leuphana.cosa.pricingsystem.structure.Bill;
 import de.leuphana.cosa.pricingsystem.structure.PriceGroup;
@@ -30,13 +32,13 @@ public class PricingEventHandler implements EventHandler {
         String topic = event.getTopic();
 
         if (topic.equals("de/leuphana/cosa/ticketautomaton/PRICEGROUP_REQUESTED")) {
+            Payable payable = (Payable) event.getProperty("payable");
             PriceGroup priceGroup = pricingSystem.selectPriceGroup();
-            Double mileage = (Double) event.getProperty("mileage");
-            Bill bill = pricingSystem.createBill(priceGroup, mileage);
+            Bill bill = pricingSystem.createBill(priceGroup, payable.getMileage());
+            PaymentReport paymentReport = new PaymentReport(bill, payable);
 
             Dictionary<String, Object> properties = new Hashtable<>();
-            properties.put("pricegroup", bill.getPriceGroup().toString());
-            properties.put("price", bill.getPrice());
+            properties.put("paymentReport", paymentReport);
 
             Event billCreatedEvent = new Event("de/leuphana/cosa/pricingsystem/BILL_CREATED", properties);
             eventAdmin.sendEvent(billCreatedEvent);

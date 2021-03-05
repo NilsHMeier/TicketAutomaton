@@ -3,7 +3,9 @@
   <component name="FacetManager">
     <facet type="Osmorc" name="OSGi">
       <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="PricingSystem.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="de.leuphana.cosa.pricingsystem.behaviour.PricingSystemImpl" bundleSymbolicName="PricingSystem" bundleVersion="1.0.0" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
-        <additionalProperties />
+        <additionalProperties>
+          <property key="Export-Package" value="de.leuphana.cosa.pricingsystem.behaviour.service" />
+        </additionalProperties>
         <additionalJARContents />
       </configuration>
     </facet>

@@ -4,6 +4,7 @@ import de.leuphana.cosa.ticketautomaton.behaviour.event.TicketEventHandler;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventConstants;
+import org.osgi.service.event.EventHandler;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -26,7 +27,7 @@ public class TicketAutomaton implements BundleActivator {
 		};
 		Dictionary properties = new Hashtable();
 		properties.put(EventConstants.EVENT_TOPIC, topics);
-		bundleContext.registerService(TicketEventHandler.class.getName(), eventHandler, properties);
+		bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
 		requestTicket();
 	}
 

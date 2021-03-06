@@ -4,6 +4,8 @@ import de.leuphana.cosa.documentsystem.behaviour.service.Manageable;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.Payable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.PaymentReport;
+import de.leuphana.cosa.printingsystem.behaviour.service.PrintConfiguration;
+import de.leuphana.cosa.printingsystem.behaviour.service.Printable;
 import de.leuphana.cosa.routesystem.behaviour.service.Driveable;
 import de.leuphana.cosa.ticketautomaton.behaviour.Adapter;
 import de.leuphana.cosa.ticketautomaton.behaviour.TicketAutomaton;
@@ -51,8 +53,25 @@ public class TicketEventHandler implements EventHandler {
             }
             case "de/leuphana/cosa/documentsystem/TEMPLATE_CREATED": {
                 Manageable manageable = (Manageable) event.getProperty("manageable");
-                System.out.println("Title of manageable: " + manageable.getTitle());
-                System.out.println("Content of manageable: " + manageable.getContent());
+                Printable printable = Adapter.manageableToPrintable(manageable);
+                PrintConfiguration printConfiguration = new PrintConfiguration() {
+                    String printFormat;
+                    @Override
+                    public void setPrintFormat(String printFormat) {
+                        this.printFormat = printFormat;
+                    }
+
+                    @Override
+                    public String getPrintFormat() {
+                        return printFormat;
+                    }
+                };
+                printConfiguration.setPrintFormat("A6");
+                Dictionary<String, Object> properties = new Hashtable<>();
+                properties.put("printable", printable);
+                properties.put("printConfiguration", printConfiguration);
+                Event printReportRequestedEvent = new Event("de/leuphana/cosa/ticketautomaton/PRINTREPORT_REQUESTED", properties);
+                eventAdmin.sendEvent(printReportRequestedEvent);
             }
             case "de/leuphana/cosa/printingsystem/TICKET_PRINTED": {
 

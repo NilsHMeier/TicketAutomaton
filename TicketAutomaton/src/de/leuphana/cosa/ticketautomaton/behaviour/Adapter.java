@@ -1,8 +1,13 @@
 package de.leuphana.cosa.ticketautomaton.behaviour;
 
+import de.leuphana.cosa.documentsystem.behaviour.service.Manageable;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
+import de.leuphana.cosa.messagingsystem.behaviour.service.Sendable;
+import de.leuphana.cosa.messagingsystem.structure.MessageType;
 import de.leuphana.cosa.pricingsystem.behaviour.service.Payable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.PaymentReport;
+import de.leuphana.cosa.printingsystem.behaviour.service.PrintReport;
+import de.leuphana.cosa.printingsystem.behaviour.service.Printable;
 import de.leuphana.cosa.routesystem.behaviour.service.Driveable;
 
 public abstract class Adapter {
@@ -54,4 +59,19 @@ public abstract class Adapter {
             }
         };
     }
+
+    public static Printable manageableToPrintable(Manageable manageable) {
+        return new Printable() {
+            @Override
+            public String getTitle() {
+                return manageable.getTitle();
+            }
+
+            @Override
+            public String getContent() {
+                return manageable.getContent();
+            }
+        };
+    }
+
 }

@@ -1,5 +1,6 @@
 package de.leuphana.cosa.ticketautomaton.behaviour.event;
 
+import de.leuphana.cosa.documentsystem.behaviour.service.Manageable;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.Payable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.PaymentReport;
@@ -49,7 +50,9 @@ public class TicketEventHandler implements EventHandler {
                 eventAdmin.sendEvent(templateRequestedEvent);
             }
             case "de/leuphana/cosa/documentsystem/TEMPLATE_CREATED": {
-
+                Manageable manageable = (Manageable) event.getProperty("manageable");
+                System.out.println("Title of manageable: " + manageable.getTitle());
+                System.out.println("Content of manageable: " + manageable.getContent());
             }
             case "de/leuphana/cosa/printingsystem/TICKET_PRINTED": {
 

@@ -24,5 +24,7 @@
     <orderEntry type="module" module-name="RouteSystem" />
     <orderEntry type="module" module-name="PricingSystem" />
     <orderEntry type="module" module-name="DocumentSystem" />
+    <orderEntry type="module" module-name="PrintingSystem" />
+    <orderEntry type="module" module-name="MessagingSystem" />
   </component>
 </module>

@@ -1,5 +1,6 @@
 package de.leuphana.cosa.ticketautomaton.behaviour;
 
+import de.leuphana.cosa.messagingsystem.behaviour.service.DeliveryReport;
 import de.leuphana.cosa.ticketautomaton.behaviour.event.TicketEventHandler;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -40,4 +41,8 @@ public class TicketAutomaton implements BundleActivator {
 		return eventHandler.requestTicket();
 	}
 
+	public void createLogfile(DeliveryReport deliveryReport) {
+		System.out.println("Saving Logfile...");
+		System.out.println(deliveryReport.getConfirmationText());
+	}
 }

@@ -2,9 +2,12 @@ package de.leuphana.cosa.ticketautomaton.behaviour.event;
 
 import de.leuphana.cosa.documentsystem.behaviour.service.Manageable;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
+import de.leuphana.cosa.messagingsystem.behaviour.service.DeliveryReport;
+import de.leuphana.cosa.messagingsystem.behaviour.service.Sendable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.Payable;
 import de.leuphana.cosa.pricingsystem.behaviour.service.PaymentReport;
 import de.leuphana.cosa.printingsystem.behaviour.service.PrintConfiguration;
+import de.leuphana.cosa.printingsystem.behaviour.service.PrintReport;
 import de.leuphana.cosa.printingsystem.behaviour.service.Printable;
 import de.leuphana.cosa.routesystem.behaviour.service.Driveable;
 import de.leuphana.cosa.ticketautomaton.behaviour.Adapter;
@@ -74,10 +77,16 @@ public class TicketEventHandler implements EventHandler {
                 eventAdmin.sendEvent(printReportRequestedEvent);
             }
             case "de/leuphana/cosa/printingsystem/TICKET_PRINTED": {
-
+                PrintReport printReport = (PrintReport) event.getProperty("printReport");
+                Sendable sendable = Adapter.printReportToSendable(printReport);
+                Dictionary<String, Object> properties = new Hashtable<>();
+                properties.put("sendable", sendable);
+                Event deliveryReportRequestedEvent = new Event("de/leuphana/cosa/ticketautomaton/DELIVERYREPORT_REQUESTED", properties);
+                eventAdmin.sendEvent(deliveryReportRequestedEvent);
             }
             case "de/leuphana/cosa/messagingsystem/MESSAGE_SENT": {
-
+                DeliveryReport deliveryReport = (DeliveryReport) event.getProperty("deliveryReport");
+                if (deliveryReport.isDeliverySuccessful()) ticketAutomaton.createLogfile(deliveryReport);
             }
         }
     }

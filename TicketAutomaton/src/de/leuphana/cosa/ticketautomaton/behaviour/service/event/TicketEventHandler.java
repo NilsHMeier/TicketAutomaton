@@ -1,4 +1,4 @@
-package de.leuphana.cosa.ticketautomaton.behaviour.event;
+package de.leuphana.cosa.ticketautomaton.behaviour.service.event;
 
 import de.leuphana.cosa.documentsystem.behaviour.service.Manageable;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
@@ -10,7 +10,7 @@ import de.leuphana.cosa.printingsystem.behaviour.service.PrintConfiguration;
 import de.leuphana.cosa.printingsystem.behaviour.service.PrintReport;
 import de.leuphana.cosa.printingsystem.behaviour.service.Printable;
 import de.leuphana.cosa.routesystem.behaviour.service.Driveable;
-import de.leuphana.cosa.ticketautomaton.behaviour.Adapter;
+import de.leuphana.cosa.ticketautomaton.behaviour.service.Adapter;
 import de.leuphana.cosa.ticketautomaton.behaviour.TicketAutomaton;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -38,7 +38,7 @@ public class TicketEventHandler implements EventHandler {
     @Override
     public void handleEvent(Event event) {
         switch (event.getTopic()) {
-            case "de/leuphana/cosa/routesystem/ROUTE_SELECTED": {
+            case "de/leuphana/cosa/routesystem/ROUTE_SELECTED" -> {
                 Driveable driveable = (Driveable) event.getProperty("driveable");
                 Payable payable = Adapter.driveableToPayable(driveable);
                 Dictionary<String, Object> properties = new Hashtable<>();
@@ -46,7 +46,7 @@ public class TicketEventHandler implements EventHandler {
                 Event priceGroupRequestedEvent = new Event("de/leuphana/cosa/ticketautomaton/PRICEGROUP_REQUESTED", properties);
                 eventAdmin.sendEvent(priceGroupRequestedEvent);
             }
-            case "de/leuphana/cosa/pricingsystem/BILL_CREATED": {
+            case "de/leuphana/cosa/pricingsystem/BILL_CREATED" -> {
                 PaymentReport paymentReport = (PaymentReport) event.getProperty("paymentReport");
                 Templateable templateable = Adapter.paymentReportToTemplateable(paymentReport);
                 Dictionary<String, Object> properties = new Hashtable<>();
@@ -54,11 +54,12 @@ public class TicketEventHandler implements EventHandler {
                 Event templateRequestedEvent = new Event("de/leuphana/cosa/ticketautomaton/TEMPLATE_REQUESTED", properties);
                 eventAdmin.sendEvent(templateRequestedEvent);
             }
-            case "de/leuphana/cosa/documentsystem/TEMPLATE_CREATED": {
+            case "de/leuphana/cosa/documentsystem/TEMPLATE_CREATED" -> {
                 Manageable manageable = (Manageable) event.getProperty("manageable");
                 Printable printable = Adapter.manageableToPrintable(manageable);
                 PrintConfiguration printConfiguration = new PrintConfiguration() {
                     String printFormat;
+
                     @Override
                     public void setPrintFormat(String printFormat) {
                         this.printFormat = printFormat;
@@ -76,7 +77,7 @@ public class TicketEventHandler implements EventHandler {
                 Event printReportRequestedEvent = new Event("de/leuphana/cosa/ticketautomaton/PRINTREPORT_REQUESTED", properties);
                 eventAdmin.sendEvent(printReportRequestedEvent);
             }
-            case "de/leuphana/cosa/printingsystem/TICKET_PRINTED": {
+            case "de/leuphana/cosa/printingsystem/TICKET_PRINTED" -> {
                 PrintReport printReport = (PrintReport) event.getProperty("printReport");
                 Sendable sendable = Adapter.printReportToSendable(printReport);
                 Dictionary<String, Object> properties = new Hashtable<>();
@@ -84,7 +85,7 @@ public class TicketEventHandler implements EventHandler {
                 Event deliveryReportRequestedEvent = new Event("de/leuphana/cosa/ticketautomaton/DELIVERYREPORT_REQUESTED", properties);
                 eventAdmin.sendEvent(deliveryReportRequestedEvent);
             }
-            case "de/leuphana/cosa/messagingsystem/MESSAGE_SENT": {
+            case "de/leuphana/cosa/messagingsystem/MESSAGE_SENT" -> {
                 DeliveryReport deliveryReport = (DeliveryReport) event.getProperty("deliveryReport");
                 if (deliveryReport.isDeliverySuccessful()) ticketAutomaton.createLogfile(deliveryReport);
             }

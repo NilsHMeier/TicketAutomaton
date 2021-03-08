@@ -1,4 +1,4 @@
-package de.leuphana.cosa.ticketautomaton.behaviour;
+package de.leuphana.cosa.ticketautomaton.behaviour.service;
 
 import de.leuphana.cosa.documentsystem.behaviour.service.Manageable;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;

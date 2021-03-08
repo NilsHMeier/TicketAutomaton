@@ -28,14 +28,10 @@ public class DocumentSystemImpl implements DocumentCommandService, BundleActivat
 
 	@Override
 	public TicketTemplate createTemplate(Templateable templateable) {
-		String start = templateable.getStart();
-		String destination = templateable.getDestination();
-		Double mileage = templateable.getMileage();
-		Double price = templateable.getPrice();
 		return switch (templateable.getPriceGroup()) {
-			case "NORMAL" -> new NormalTicketTemplate(start, destination, mileage, price);
-			case "CHEAPER" -> new CheaperTicketTemplate(start, destination, mileage, price);
-			case "BARGAIN" -> new BargainTicketTemplate(start, destination, mileage, price);
+			case "NORMAL" -> new NormalTicketTemplate(templateable);
+			case "CHEAPER" -> new CheaperTicketTemplate(templateable);
+			case "BARGAIN" -> new BargainTicketTemplate(templateable);
 			default -> null;
 		};
 	}
@@ -56,7 +52,8 @@ public class DocumentSystemImpl implements DocumentCommandService, BundleActivat
 				if (ticketTemplate instanceof NormalTicketTemplate) content.append(" normal. ");
 				else if (ticketTemplate instanceof  CheaperTicketTemplate) content.append(" cheaper. ");
 				else if (ticketTemplate instanceof BargainTicketTemplate) content.append(" bargain. ");
-				content.append("Price is ").append(ticketTemplate.getPrice().toString());
+				content.append("Price is ").append(ticketTemplate.getPrice().toString()).append(". ");
+				content.append("Date: ").append(ticketTemplate.getDate());
 				return content.toString();
 			}
 		};

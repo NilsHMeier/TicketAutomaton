@@ -2,13 +2,16 @@ package de.leuphana.cosa.pricingsystem.structure;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 
 public class Bill {
     private final PriceGroup priceGroup;
     private Double price;
+    private final LocalDate date;
 
     public Bill(PriceGroup priceGroup, Double mileage) {
         this.priceGroup = priceGroup;
+        date = LocalDate.now();
         calculatePrice(mileage);
     }
 
@@ -37,5 +40,9 @@ public class Bill {
     @Override
     public String toString() {
         return "PriceGroup " + priceGroup.name() + " with total price " + price;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

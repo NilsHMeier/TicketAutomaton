@@ -1,8 +1,10 @@
 package de.leuphana.cosa.documentsystem.structure;
 
+import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
+
 public class CheaperTicketTemplate extends TicketTemplate{
 
-    public CheaperTicketTemplate(String start, String destination, Double mileage, Double price) {
-        super(start, destination, mileage, price);
+    public CheaperTicketTemplate(Templateable templateable) {
+        super(templateable);
     }
 }

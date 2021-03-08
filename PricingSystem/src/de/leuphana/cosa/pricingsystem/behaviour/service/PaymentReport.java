@@ -1,7 +1,8 @@
 package de.leuphana.cosa.pricingsystem.behaviour.service;
 
-import de.leuphana.cosa.pricingsystem.behaviour.service.Payable;
 import de.leuphana.cosa.pricingsystem.structure.Bill;
+
+import java.time.LocalDate;
 
 public class PaymentReport {
 
@@ -10,6 +11,7 @@ public class PaymentReport {
     private final String priceGroup;
     private final Double mileage;
     private final Double price;
+    private final LocalDate date;
 
     public PaymentReport(Bill bill, Payable payable) {
         start = payable.getStart();
@@ -17,6 +19,7 @@ public class PaymentReport {
         priceGroup = bill.getPriceGroup().toString();
         mileage = payable.getMileage();
         price = bill.getPrice();
+        date = bill.getDate();
     }
 
     public String getStart() {
@@ -37,5 +40,9 @@ public class PaymentReport {
 
     public Double getPrice() {
         return price;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

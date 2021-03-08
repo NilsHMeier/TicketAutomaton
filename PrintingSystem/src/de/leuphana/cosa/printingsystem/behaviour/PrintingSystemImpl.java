@@ -27,6 +27,7 @@ public class PrintingSystemImpl implements PrintingCommandService, BundleActivat
 
 	public PrintingSystemImpl() {
 		printJobQueue = PrintJobQueue.getInstance();
+		printJobQueue.addPrinter(new Printer(PrintFormat.A6));
 		printJobQueue.addPrinter(new Printer(PrintFormat.A4));
 		printJobQueue.addPrinter(new Printer(PrintFormat.A3));
 	}
@@ -36,8 +37,10 @@ public class PrintingSystemImpl implements PrintingCommandService, BundleActivat
 		PrintJob printJob = new PrintJob(printable, printConfiguration);
 		printJobQueue.addPrintJob(printJob);
 		// Print content to console
+		System.out.println("- - - - TICKET - - - -");
 		System.out.println(printable.getTitle());
 		System.out.println(printable.getContent());
+		System.out.println("- - - - - - - - - - -");
 		// Create PrintReport
 		PrintReport printReport = new PrintReport();
 		printReport.setConfirmationText(printable.getContent());

@@ -1,16 +1,22 @@
 package de.leuphana.cosa.documentsystem.structure;
 
+import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
+
+import java.time.LocalDate;
+
 public abstract class TicketTemplate {
     private final String start;
     private final String destination;
     private final Double mileage;
     private final Double price;
+    private final LocalDate date;
 
-    protected TicketTemplate(String start, String destination, Double mileage, Double price) {
-        this.start = start;
-        this.destination = destination;
-        this.mileage = mileage;
-        this.price = price;
+    protected TicketTemplate(Templateable templateable) {
+        this.start = templateable.getStart();
+        this.destination = templateable.getDestination();
+        this.mileage = templateable.getMileage();
+        this.price = templateable.getPrice();
+        date = templateable.getDate();
     }
 
     public String getStart() {
@@ -27,5 +33,9 @@ public abstract class TicketTemplate {
 
     public Double getPrice() {
         return price;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

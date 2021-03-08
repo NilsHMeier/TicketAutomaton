@@ -14,6 +14,7 @@ class RouteSystemTest {
     static void setUpBeforeClass() {
         routingSystem = new RouteSystemImpl();
         route = new Route("Hamburg", "Lüneburg", 43.5);
+        // Create some default routs
         routingSystem.createRoute("Hamburg", "Bremen", 94.9);
         routingSystem.createRoute("Hamburg", "Hannover", 132.0);
         routingSystem.createRoute("Bremen", "Lueneburg", 108.6);

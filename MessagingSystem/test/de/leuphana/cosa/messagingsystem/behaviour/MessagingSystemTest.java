@@ -20,12 +20,12 @@ class MessagingSystemTest {
 			
 			@Override
 			public String getSender() {
-				return "slotos@leuphana.de";
+				return "TicketAutomaton1@train.de";
 			}
 			
 			@Override
 			public String getReceiver() {
-				return "rainer.zufall@web.de";
+				return "TrainCentral@train.de";
 			}
 			
 			@Override
@@ -35,7 +35,7 @@ class MessagingSystemTest {
 			
 			@Override
 			public String getContent() {
-				return "This is a content!";
+				return "Ticket sold!";
 			}
 		};
 	}

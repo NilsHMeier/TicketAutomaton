@@ -20,7 +20,7 @@ class PrintingSystemTest {
 		printable = new Printable() {
 			@Override
 			public String getTitle() {
-				return "NormalTicketTemplate";
+				return "CheaperTicketTemplate";
 			}
 			@Override
 			public String getContent() {

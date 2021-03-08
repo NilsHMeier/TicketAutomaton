@@ -4,7 +4,10 @@ import de.leuphana.cosa.pricingsystem.behaviour.service.PricingCommandService;
 import de.leuphana.cosa.pricingsystem.structure.Bill;
 import de.leuphana.cosa.pricingsystem.structure.PriceGroup;
 
-public class PricingCLITest {
+/**
+ * Class to test the selection of the price group in PricingSystemImpl.
+ */
+class PricingCLITest {
 
     static PricingCommandService pricingSystem;
 

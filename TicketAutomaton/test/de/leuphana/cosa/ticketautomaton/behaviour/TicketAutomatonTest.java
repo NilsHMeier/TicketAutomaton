@@ -15,6 +15,7 @@ class TicketAutomatonTest {
 
 	@Test
 	void canTicketBeSold() {
+		// Will not work due to missing framework and other modules
 		Assertions.assertTrue(ticketAutomaton.requestTicket());
 	}
 

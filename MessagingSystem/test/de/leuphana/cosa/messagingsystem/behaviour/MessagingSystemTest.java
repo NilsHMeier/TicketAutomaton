@@ -13,7 +13,7 @@ class MessagingSystemTest {
 	private static Sendable sendable;
 	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	static void setUpBeforeClass() {
 		messagingSystem = new MessagingSystemImpl();
 		
 		sendable = new Sendable() {
@@ -41,7 +41,7 @@ class MessagingSystemTest {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	static void tearDownAfterClass() {
 		messagingSystem = null;
 	}
 

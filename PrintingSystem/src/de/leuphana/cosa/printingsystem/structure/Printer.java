@@ -1,7 +1,7 @@
 package de.leuphana.cosa.printingsystem.structure;
 
 public class Printer {
-	private PrintFormat printFormat;
+	private final PrintFormat printFormat;
 
 	public Printer(PrintFormat printFormat) {
 		this.printFormat = printFormat;

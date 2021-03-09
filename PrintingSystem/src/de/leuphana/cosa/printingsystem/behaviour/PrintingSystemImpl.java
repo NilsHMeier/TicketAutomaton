@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class PrintingSystemImpl implements PrintingCommandService, BundleActivator {
 
-	private PrintJobQueue printJobQueue;
+	private final PrintJobQueue printJobQueue;
 
 	public PrintingSystemImpl() {
 		printJobQueue = PrintJobQueue.getInstance();
@@ -55,20 +55,20 @@ public class PrintingSystemImpl implements PrintingCommandService, BundleActivat
 	}
 
 	@Override
-	public void start(BundleContext bundleContext) throws Exception {
+	public void start(BundleContext bundleContext) {
 		System.out.println("Starting PrintingSystem...");
 		//Register PrintEventHandler
 		String[] topics = new String[] {
 				"de/leuphana/cosa/ticketautomaton/PRINTREPORT_REQUESTED"
 		};
-		Dictionary properties = new Hashtable();
+		Dictionary<String, Object> properties = new Hashtable<>();
 		properties.put(EventConstants.EVENT_TOPIC, topics);
 		PrintingEventHandler eventHandler = new PrintingEventHandler(this, bundleContext);
 		bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
 	}
 
 	@Override
-	public void stop(BundleContext bundleContext) throws Exception {
+	public void stop(BundleContext bundleContext) {
 		System.out.println("...stopping PrintingSystem!");
 	}
 }

@@ -8,14 +8,11 @@ public class CreatedPrintJobState extends PrintJobState {
 
 	@Override
 	public PrintJobState changePrintJobState(PrintJobAction printJobAction) {
-		PrintJobState printJobState = this;
-		
-		switch (printJobAction) {
-		case QUEUE: {
+		PrintJobState printJobState;
+
+		if (printJobAction == PrintJobAction.QUEUE) {
 			printJobState = new QueuedPrintJobState();
-			break;
-		}
-		default:
+		} else {
 			throw new IllegalArgumentException("Unexpected value: " + printJobAction);
 		}
 		

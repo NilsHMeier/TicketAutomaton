@@ -18,24 +18,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="log4j-api-2.13.3" level="application" />
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../lib/junit-jupiter-5.4.2.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/junit-jupiter-api-5.4.2.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/apiguardian-api-1.0.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/opentest4j-1.1.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/junit-platform-commons-1.4.2.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/junit-jupiter-params-5.4.2.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/junit-jupiter-engine-5.4.2.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/junit-platform-engine-1.4.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="log4j-core-2.13.3" level="application" />
     <orderEntry type="library" scope="TEST" name="JUnit5.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="felix" level="application" />
     <orderEntry type="library" name="org.apache.felix.eventadmin-1.6.2" level="project" />

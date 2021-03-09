@@ -46,20 +46,20 @@ public class MessagingSystemImpl implements MessagingCommandService, BundleActiv
 	}
 
 	@Override
-	public void start(BundleContext bundleContext) throws Exception {
+	public void start(BundleContext bundleContext) {
 		System.out.println("Starting MessagingSystem...");
 		//Register MessagingEventHandler
 		String[] topics = new String[] {
 				"de/leuphana/cosa/ticketautomaton/DELIVERYREPORT_REQUESTED"
 		};
-		Dictionary properties = new Hashtable();
+		Dictionary<String, Object> properties = new Hashtable<>();
 		properties.put(EventConstants.EVENT_TOPIC, topics);
 		MessagingEventHandler eventHandler = new MessagingEventHandler(this, bundleContext);
 		bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
 	}
 
 	@Override
-	public void stop(BundleContext bundleContext) throws Exception {
+	public void stop(BundleContext bundleContext) {
 		System.out.println("...stopping MessagingSystem!");
 	}
 }

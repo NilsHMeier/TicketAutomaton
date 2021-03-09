@@ -2,8 +2,6 @@ package de.leuphana.cosa.documentsystem.behaviour;
 
 import de.leuphana.cosa.documentsystem.behaviour.service.DocumentCommandService;
 import de.leuphana.cosa.documentsystem.behaviour.service.Templateable;
-import de.leuphana.cosa.documentsystem.structure.BargainTicketTemplate;
-import de.leuphana.cosa.documentsystem.structure.NormalTicketTemplate;
 import de.leuphana.cosa.documentsystem.structure.TicketTemplate;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;

@@ -15,7 +15,7 @@ class PrintingSystemTest {
 	private static Printable printable;
 	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	static void setUpBeforeClass() {
 		printingSystem = new PrintingSystemImpl();
 		printable = new Printable() {
 			@Override
@@ -42,7 +42,7 @@ class PrintingSystemTest {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	static void tearDownAfterClass() {
 		printingSystem = null;
 		printConfiguration = null;
 		printable = null;

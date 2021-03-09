@@ -8,19 +8,12 @@ public class QueuedPrintJobState extends PrintJobState {
 
 	@Override
 	public PrintJobState changePrintJobState(PrintJobAction printJobAction) {
-		PrintJobState printJobState = this;
+		PrintJobState printJobState;
 
 		switch (printJobAction) {
-		case PRINT: {
-			printJobState = new PrintedPrintJobState();
-			break;
-		}
-		case STOP: {
-			printJobState = new StoppedPrintJobState();
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + printJobAction);
+			case PRINT -> printJobState = new PrintedPrintJobState();
+			case STOP -> printJobState = new StoppedPrintJobState();
+			default -> throw new IllegalArgumentException("Unexpected value: " + printJobAction);
 		}
 
 		return printJobState;

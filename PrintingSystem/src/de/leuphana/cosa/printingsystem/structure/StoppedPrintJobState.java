@@ -8,7 +8,6 @@ public class StoppedPrintJobState extends PrintJobState {
 
 	@Override
 	public PrintJobState changePrintJobState(PrintJobAction printJobAction) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -10,17 +10,13 @@ public class MessagingProtocolFactory {
 		MessagingProtocol messagingProtocol;
 
 		switch (messageType) {
-		case EMAIL: {
-			messagingProtocol = new EmailMessagingProtocol();
-			break;
-		}
-		case SMS: {
-			messagingProtocol = new SMSMessagingProtocol();
-			break;
-		}
-		default:
-			// besser mit MessageTypeNotAllowedException
-			throw new IllegalArgumentException("Unexpected value: " + messageType);
+			case EMAIL -> {
+				messagingProtocol = new EmailMessagingProtocol();
+			}
+			case SMS -> {
+				messagingProtocol = new SMSMessagingProtocol();
+			}
+			default -> throw new IllegalArgumentException("Unexpected value: " + messageType);
 		}
 
 		return messagingProtocol;

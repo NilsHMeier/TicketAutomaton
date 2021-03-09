@@ -4,9 +4,9 @@ import de.leuphana.cosa.printingsystem.behaviour.service.PrintConfiguration;
 import de.leuphana.cosa.printingsystem.behaviour.service.Printable;
 
 public class PrintJob {
-	private PrintConfiguration printConfiguration;
+	private final PrintConfiguration printConfiguration;
 	private PrintJobState printJobState;
-	private Printable printable;
+	private final Printable printable;
 	
 	public PrintJob(Printable printable, PrintConfiguration printConfiguration) {
 		this.printable = printable;
@@ -22,4 +22,7 @@ public class PrintJob {
 		printJobState = printJobState.changePrintJobState(printJobAction);
 	}
 
+	public Printable getPrintable() {
+		return printable;
+	}
 }

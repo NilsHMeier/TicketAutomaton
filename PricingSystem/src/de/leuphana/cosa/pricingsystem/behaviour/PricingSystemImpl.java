@@ -45,20 +45,20 @@ public class PricingSystemImpl implements PricingCommandService, BundleActivator
     }
 
     @Override
-    public void start(BundleContext bundleContext) throws Exception {
+    public void start(BundleContext bundleContext) {
         System.out.println("Starting PricingSystem...");
         //Register PricingEventHandler
         String[] topics = new String[] {
                 "de/leuphana/cosa/ticketautomaton/PRICEGROUP_REQUESTED"
         };
-        Dictionary properties = new Hashtable();
+        Dictionary<String, Object> properties = new Hashtable<>();
         properties.put(EventConstants.EVENT_TOPIC, topics);
         PricingEventHandler eventHandler = new PricingEventHandler(this, bundleContext);
         bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
     }
 
     @Override
-    public void stop(BundleContext bundleContext) throws Exception {
+    public void stop(BundleContext bundleContext) {
         System.out.println("...stopping PricingSystem!");
     }
 }

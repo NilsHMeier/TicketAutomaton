@@ -18,19 +18,12 @@ public class MessageBuilder {
 		
 		MessageHeader messageHeader = createMessageHeader(sender, receiver, messageType);
 		MessageBody messageBody = createMessageBody(contentAsString, messageType);
-		
-		
+
+
 		switch (messageType) {
-		case EMAIL: {
-			message = new EmailMessage(messageHeader, messageBody);
-			break;
-		}
-		case SMS: {
-			message = new SMSMessage(messageHeader, messageBody);
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + messageType);
+			case EMAIL -> message = new EmailMessage(messageHeader, messageBody);
+			case SMS -> message = new SMSMessage(messageHeader, messageBody);
+			default -> throw new IllegalArgumentException("Unexpected value: " + messageType);
 		}
 		
 		return message;
@@ -39,20 +32,15 @@ public class MessageBuilder {
 	private static MessageHeader createMessageHeader(String senderAddress, String receiverAddress, MessageType messageType) {
 		Receiver receiver = null;
 		Sender sender = null;
-		
-		// TODO Factory Method Pattern !!!
+
 		switch (messageType) {
-		case EMAIL: {
-			receiver = new EmailReceiver(receiverAddress);
-			sender = new EmailSender(senderAddress);
-			break;
-		}
-		case SMS: {
-			// TODO
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + messageType);
+			case EMAIL -> {
+				receiver = new EmailReceiver(receiverAddress);
+				sender = new EmailSender(senderAddress);
+			}
+			case SMS -> {
+			}
+			default -> throw new IllegalArgumentException("Unexpected value: " + messageType);
 		}
 		
 		return new MessageHeader(sender, receiver);
@@ -60,19 +48,12 @@ public class MessageBuilder {
 	
 	private static MessageBody createMessageBody(String contentAsString, MessageType messageType) {
 		Content content = null;
-		
-		// TODO Factory Method Pattern !!!
+
 		switch (messageType) {
-		case EMAIL: {
-			content = new EmailContent(contentAsString);
-			break;
-		}
-		case SMS: {
-			// TODO
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + messageType);
+			case EMAIL -> content = new EmailContent(contentAsString);
+			case SMS -> {
+			}
+			default -> throw new IllegalArgumentException("Unexpected value: " + messageType);
 		}
 		return new MessageBody(content);
 	}

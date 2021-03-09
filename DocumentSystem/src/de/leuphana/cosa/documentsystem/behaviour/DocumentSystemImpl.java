@@ -8,8 +8,6 @@ import de.leuphana.cosa.documentsystem.structure.BargainTicketTemplate;
 import de.leuphana.cosa.documentsystem.structure.CheaperTicketTemplate;
 import de.leuphana.cosa.documentsystem.structure.NormalTicketTemplate;
 import de.leuphana.cosa.documentsystem.structure.TicketTemplate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventConstants;
@@ -19,12 +17,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class DocumentSystemImpl implements DocumentCommandService, BundleActivator {
-
-	private final Logger logger;
-
-	public DocumentSystemImpl() {
-		logger = LogManager.getLogger(this.getClass());
-	}
 
 	@Override
 	public TicketTemplate createTemplate(Templateable templateable) {
@@ -60,20 +52,20 @@ public class DocumentSystemImpl implements DocumentCommandService, BundleActivat
 	}
 
     @Override
-    public void start(BundleContext bundleContext) throws Exception {
+    public void start(BundleContext bundleContext) {
 		System.out.println("Starting DocumentSystem...");
 		//Register DocumentEventHandler
 		String[] topics = new String[] {
 				"de/leuphana/cosa/ticketautomaton/TEMPLATE_REQUESTED"
 		};
-		Dictionary properties = new Hashtable();
+		Dictionary<String, Object> properties = new Hashtable<>();
 		properties.put(EventConstants.EVENT_TOPIC, topics);
 		DocumentEventHandler eventHandler = new DocumentEventHandler(this, bundleContext);
 		bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
     }
 
     @Override
-    public void stop(BundleContext bundleContext) throws Exception {
+    public void stop(BundleContext bundleContext) {
 		System.out.println("...stopping DocumentSystem!");
     }
 

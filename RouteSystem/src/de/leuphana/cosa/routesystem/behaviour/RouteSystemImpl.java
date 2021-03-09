@@ -3,8 +3,6 @@ package de.leuphana.cosa.routesystem.behaviour;
 import de.leuphana.cosa.routesystem.behaviour.service.RouteCommandService;
 import de.leuphana.cosa.routesystem.behaviour.service.event.RouteEventHandler;
 import de.leuphana.cosa.routesystem.structure.Route;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventConstants;
@@ -16,11 +14,9 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
 
     private final Map<String, Map<String, Route>> routeMap;
     private final Scanner scanner;
-    private final Logger logger;
 
     public RouteSystemImpl() {
         routeMap = new HashMap<>();
-        logger = LogManager.getLogger(this.getClass());
         scanner = new Scanner(System.in);
     }
 
@@ -62,7 +58,6 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
             routeMap.get(route.getStart()).put(route.getDestination(), route);
         }
         else return false;
-        logger.info("Added route from" + route.getStart() + " to " + route.getDestination() + " with distance " + route.getDistance());
         return true;
     }
 
@@ -76,13 +71,13 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
     }
 
     @Override
-    public void start(BundleContext bundleContext) throws Exception {
+    public void start(BundleContext bundleContext) {
         System.out.println("Starting RouteSystem...");
         //Register RoutingEventHandler
         String[] topics = new String[] {
                 "de/leuphana/cosa/ticketautomaton/TICKET_REQUESTED"
         };
-        Dictionary properties = new Hashtable();
+        Dictionary<String, Object> properties = new Hashtable<>();
         properties.put(EventConstants.EVENT_TOPIC, topics);
         RouteEventHandler eventHandler = new RouteEventHandler(this, bundleContext);
         bundleContext.registerService(EventHandler.class.getName(), eventHandler, properties);
@@ -96,7 +91,7 @@ public class RouteSystemImpl implements RouteCommandService, BundleActivator {
     }
 
     @Override
-    public void stop(BundleContext bundleContext) throws Exception {
+    public void stop(BundleContext bundleContext) {
         System.out.println("...stopping RouteSystem!");
     }
 }

@@ -10,18 +10,11 @@ public abstract class AbstractMessagingFactory {
 
 	public static AbstractMessagingFactory getFactory(MessageType messageType) {
 		AbstractMessagingFactory abstractMessagingFactory;
-		
+
 		switch (messageType) {
-		case EMAIL: {
-			abstractMessagingFactory = new EmailMessagingFactory();
-			break;
-		}
-		case SMS: {
-			abstractMessagingFactory = new SMSMessagingFactory();
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + messageType);
+			case EMAIL -> abstractMessagingFactory = new EmailMessagingFactory();
+			case SMS -> abstractMessagingFactory = new SMSMessagingFactory();
+			default -> throw new IllegalArgumentException("Unexpected value: " + messageType);
 		}
 		
 		return abstractMessagingFactory;

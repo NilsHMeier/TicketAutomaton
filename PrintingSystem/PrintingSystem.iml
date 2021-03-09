@@ -18,10 +18,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="log4j-api-2.13.3" level="application" />
     <orderEntry type="library" scope="TEST" name="JUnit5.4" level="project" />
-    <orderEntry type="library" name="log4j-core-2.13.3" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="felix" level="application" />
     <orderEntry type="library" name="org.apache.felix.eventadmin-1.6.2" level="project" />
+    <orderEntry type="library" name="log4j-core-2.13.3" level="application" />
+    <orderEntry type="library" name="log4j-api-2.13.3" level="application" />
   </component>
 </module>

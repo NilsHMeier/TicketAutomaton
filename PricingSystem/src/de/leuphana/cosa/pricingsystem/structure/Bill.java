@@ -18,12 +18,8 @@ public class Bill {
     private void calculatePrice(Double mileage) {
         price = mileage * 0.03;
         switch (priceGroup) {
-            case CHEAPER -> {
-                price = price * 0.75;
-            }
-            case BARGAIN -> {
-                price = price * 0.5;
-            }
+            case CHEAPER -> price = price * 0.75;
+            case BARGAIN -> price = price * 0.5;
         }
         // Make sure price has two decimal places
         price = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP).doubleValue();

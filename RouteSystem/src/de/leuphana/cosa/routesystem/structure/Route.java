@@ -1,5 +1,8 @@
 package de.leuphana.cosa.routesystem.structure;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Route {
     private final String start;
     private final String destination;
@@ -10,7 +13,7 @@ public class Route {
         this.start = start;
         this.destination = destination;
         this.distance = distance;
-        mileage = distance * 1.45;
+        mileage = new BigDecimal(distance * 1.45).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     public String getStart() {

@@ -29,8 +29,14 @@ public class PricingSystemImpl implements PricingCommandService, BundleActivator
             System.out.println(counter + " - " + priceGroup);
             counter++;
         }
-        System.out.print("Your choice (enter the number): ");
-        int choice = scanner.nextInt();
+        int choice;
+        do {
+            System.out.print("Your choice (enter the number): ");
+            choice = scanner.nextInt();
+            if (choice < 1 || choice > 3) System.out.println("Unknown price group");
+        }
+        while (choice < 1 || choice > 3);
+
         return switch (choice) {
             case 1 -> PriceGroup.NORMAL;
             case 2 -> PriceGroup.CHEAPER;

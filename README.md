@@ -27,7 +27,7 @@ The OSGi facets should be automatically detected and displayed based on the .iml
 Build the project to generate the OSGi bundles. 
 
 Option 2:
-Download the built bundles from the repository (out/bundles) and add them to your framework manually. 
+Download the built bundles from the repository (out/production) and add them to your framework manually. 
 Observe the notes from the following section "Framework Setup" to ensure the functionality of the ticket vending machine.
 
 ## Framework Setup

@@ -40,4 +40,3 @@ To ensure functionality, pay attention to the starting order of the individual b
 - Start level 1: org.apache.felix.eventadmin, org.apache.logging.log4j.core, org.apache.logging.log4j.api
 - Start level 2: RouteSystem, PricingSystem, DocumentSystem, PrintingSystem, MessagingSystem
 - Start level 3: TicketAutomaton
-Launch the framework and enjoy using the ticket vending machine!

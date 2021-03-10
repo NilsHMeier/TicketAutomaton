@@ -36,11 +36,6 @@ public class PrintingSystemImpl implements PrintingCommandService, BundleActivat
 	public PrintReport printTicket(Printable printable, PrintConfiguration printConfiguration) {
 		PrintJob printJob = new PrintJob(printable, printConfiguration);
 		printJobQueue.addPrintJob(printJob);
-		// Print content to console
-		System.out.println("- - - - TICKET - - - -");
-		System.out.println(printable.getTitle());
-		System.out.println(printable.getContent());
-		System.out.println("- - - - - - - - - - -");
 		// Create PrintReport
 		PrintReport printReport = new PrintReport();
 		printReport.setConfirmationText(printable.getContent());
